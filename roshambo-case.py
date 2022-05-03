@@ -17,17 +17,17 @@ PCB = 10
 RESET = 3
 POWER = 5
 LED = 7
-FAN = 8
+#FAN = 8
 
 # Tell the script if this is running on a ROCK64 or ROCKPRO64
-GPIO.setrock("ROCK64")
+GPIO.setrock("ROCKPRO64")
 
 # Setup 
 GPIO.setup(PCB, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(RESET, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(POWER, GPIO.IN)
 GPIO.setup(LED, GPIO.OUT)
-GPIO.setup(FAN, GPIO.OUT)
+#GPIO.setup(FAN, GPIO.OUT)
 IGNORE_PWR_OFF = False
 if(GPIO.input(POWER) == "0"):
 	# System was started with power switch off
@@ -35,7 +35,7 @@ if(GPIO.input(POWER) == "0"):
 
 # Turn on LED AND FAN
 GPIO.output(LED, GPIO.HIGH)
-GPIO.output(FAN, GPIO.HIGH)
+#GPIO.output(FAN, GPIO.HIGH)
 
 # Function that blinks LED once when button press is detected
 def Blink_LED():
@@ -58,7 +58,7 @@ while True:
 			if(''.join(filter(lambda c: c in string.printable, rockCheck)) == "okay"):
 				print("Suspending...")
 				GPIO.output(LED, GPIO.LOW)
-				GPIO.output(FAN, GPIO.LOW)
+#				GPIO.output(FAN, GPIO.LOW)
 				os.system("ifconfig eth0 down")
 				os.system("echo mem > /sys/power/state")
 				time.sleep(1)
@@ -68,12 +68,12 @@ while True:
 			else:
 				print("Shutting down...")
 				Blink_LED()
-				GPIO.output(FAN, GPIO.LOW)
+#				GPIO.output(FAN, GPIO.LOW)
 				os.system("shutdown -h now")
 				break
 	else:
 		break
 	time.sleep(0.3)
 
-GPIO.output(FAN, GPIO.LOW)
+#GPIO.output(FAN, GPIO.LOW)
 GPIO.cleanup()
