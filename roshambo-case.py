@@ -64,7 +64,7 @@ while True:
 				time.sleep(1)
 				os.system("ifconfig eth0 up")
 				GPIO.output(LED, GPIO.HIGH)
-				GPIO.output(FAN, GPIO.HIGH)
+#				GPIO.output(FAN, GPIO.HIGH)
 			else:
 				print("Shutting down...")
 				Blink_LED()
